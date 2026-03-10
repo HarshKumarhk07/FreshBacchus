@@ -90,14 +90,14 @@ const CurtainReveal = ({ onDone }) => {
             <motion.div
                 className="flex-1 bg-[#0a1a0a]"
                 variants={{ closed: { scaleX: 1 }, open: { scaleX: 0 } }}
-                transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
+                transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
                 style={{ originX: 0 }}
             />
             {/* Right panel */}
             <motion.div
                 className="flex-1 bg-[#0a1a0a]"
                 variants={{ closed: { scaleX: 1 }, open: { scaleX: 0 } }}
-                transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 0.5 }}
+                transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
                 style={{ originX: 1 }}
             />
         </motion.div>
@@ -142,7 +142,7 @@ const SlideContent = ({ slide, isReady }) => {
         visible: (i) => ({
             y: '0%',
             opacity: 1,
-            transition: { duration: 0.5, delay: isReady ? 0.3 + i * 0.08 : 9999, ease: [0.22, 1, 0.36, 1] },
+            transition: { duration: 0.45, delay: isReady ? 0.1 + i * 0.06 : 9999, ease: [0.22, 1, 0.36, 1] },
         }),
     };
 
@@ -152,7 +152,7 @@ const SlideContent = ({ slide, isReady }) => {
             <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: isReady ? 1 : 0, x: isReady ? 0 : -30 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
+                transition={{ duration: 0.3, delay: 0.05 }}
                 className="mb-3 sm:mb-5 flex items-center gap-3"
             >
                 <span
@@ -206,7 +206,7 @@ const SlideContent = ({ slide, isReady }) => {
             <motion.div
                 initial={{ scaleX: 0, originX: 0 }}
                 animate={{ scaleX: isReady ? 1 : 0 }}
-                transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className="w-20 sm:w-32 h-[2px] mb-4 sm:mb-6 rounded-full"
                 style={{ background: 'linear-gradient(90deg, #4ade80, transparent)' }}
             />
@@ -215,7 +215,7 @@ const SlideContent = ({ slide, isReady }) => {
             <motion.p
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: isReady ? 1 : 0, y: isReady ? 0 : 18 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
+                transition={{ duration: 0.5, delay: 0.35 }}
                 className="text-sm sm:text-base md:text-lg text-stone-300 max-w-[85%] sm:max-w-md leading-relaxed font-light mb-6 sm:mb-10"
             >
                 {slide.subtitle}
@@ -225,7 +225,7 @@ const SlideContent = ({ slide, isReady }) => {
             <motion.div
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: isReady ? 1 : 0, y: isReady ? 0 : 22 }}
-                transition={{ duration: 0.5, delay: 0.85 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
                 className="flex flex-wrap gap-3 sm:gap-4 pointer-events-auto relative"
                 style={{ zIndex: 50 }}
             >
