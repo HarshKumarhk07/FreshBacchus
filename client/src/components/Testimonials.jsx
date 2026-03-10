@@ -22,10 +22,9 @@ const Testimonials = () => {
                 }
             } catch (error) {
                 console.error('Error fetching testimonials:', error);
-                // Fallback UI data
                 setTestimonials([
-                    { _id: '1', name: 'John D.', review: 'Always the freshest produce! Love it.', rating: 5 },
-                    { _id: '2', name: 'Alice S.', review: 'Great grocery options.', rating: 4 }
+                    { _id: '1', name: 'John D.', review: 'Harvest House consistently delivers the best local produce in Bacchus Marsh. The quality is unmatched!', rating: 5 },
+                    { _id: '2', name: 'Alice S.', review: 'A wonderful community-focused store with a premium selection of organic options. Highly recommended.', rating: 5 }
                 ]);
             } finally {
                 setLoading(false);
@@ -36,54 +35,64 @@ const Testimonials = () => {
 
     return (
         <section
-            className="py-24 relative overflow-hidden"
+            className="py-32 relative overflow-hidden bg-stone-900"
             id="testimonials"
-            style={{
-                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(${testimonialsBg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundAttachment: 'fixed'
-            }}
         >
-            <div className="container mx-auto px-6 max-w-5xl">
+            {/* Background Texture with overlay */}
+            <div
+                className="absolute inset-0 grayscale opacity-20 scale-110"
+                style={{
+                    backgroundImage: `url(${testimonialsBg})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundAttachment: 'fixed'
+                }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-stone-900 via-stone-900/80 to-stone-900" />
+
+            <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-24"
                 >
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
-                    <div className="w-24 h-1 bg-freshGreen mx-auto rounded"></div>
+                    <span className="text-fresh-green font-black tracking-[0.3em] uppercase text-xs mb-4 block">Kind Words</span>
+                    <h2 className="text-4xl md:text-6xl font-black text-white mb-6">Client Experiences</h2>
+                    <div className="w-24 h-2 bg-fresh-green mx-auto rounded-full"></div>
                 </motion.div>
 
                 {loading ? (
-                    <div className="text-center text-gray-500">Loading reviews...</div>
+                    <div className="text-center text-stone-400 font-bold tracking-widest uppercase">Harvesting Reviews...</div>
                 ) : (
                     <Swiper
                         modules={[Autoplay, Pagination]}
-                        spaceBetween={30}
+                        spaceBetween={50}
                         slidesPerView={1}
                         breakpoints={{
-                            768: { slidesPerView: 2 }
+                            1024: { slidesPerView: 2 }
                         }}
-                        autoplay={{ delay: 4000, disableOnInteraction: false }}
+                        autoplay={{ delay: 5000, disableOnInteraction: false }}
                         pagination={{ clickable: true }}
-                        className="pb-16"
+                        className="pb-24 swiper-premium"
                     >
                         {testimonials.map((test) => (
                             <SwiperSlide key={test._id}>
-                                <div className="bg-white p-8 rounded-2xl h-full flex flex-col premium-shadow m-4">
-                                    <FaQuoteLeft className="text-4xl text-green-100 mb-6" />
-                                    <p className="text-gray-600 italic mb-8 flex-grow text-lg">"{test.review}"</p>
-                                    <div className="flex items-center justify-between mt-auto">
-                                        <h4 className="font-bold text-gray-800">{test.name}</h4>
-                                        <div className="flex text-yellow-400">
+                                <motion.div
+                                    className="glass-panel p-12 rounded-[3.5rem] h-full flex flex-col premium-card border-white/5 relative overflow-hidden group"
+                                >
+                                    <div className="absolute -top-10 -right-10 text-[12rem] text-white/5 font-black group-hover:text-fresh-green/10 transition-colors">"</div>
+                                    <FaQuoteLeft className="text-5xl text-fresh-green mb-10" />
+                                    <p className="text-stone-800 font-medium italic mb-12 flex-grow text-xl leading-relaxed">"{test.review}"</p>
+                                    <div className="flex items-center justify-between mt-auto pt-8 border-t border-white/5">
+                                        <h4 className="font-black text-stone-900 text-lg tracking-tight uppercase">{test.name}</h4>
+                                        <div className="flex text-amber-400 gap-1 text-sm bg-white/5 p-3 rounded-2xl">
                                             {[...Array(test.rating || 5)].map((_, i) => (
-                                                <FaStar key={i} />
+                                                <FaStar key={i} className="drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" />
                                             ))}
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             </SwiperSlide>
                         ))}
                     </Swiper>

@@ -13,8 +13,8 @@ function App() {
         <div className="font-sans antialiased bg-lightBg text-darkText">
             <Navbar />
             <Hero />
-            <BusinessDetails />
             <Products />
+            <BusinessDetails />
             <About />
             <Testimonials />
             <Contact />
