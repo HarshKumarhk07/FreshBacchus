@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import { FaStar, FaQuoteLeft } from 'react-icons/fa';
-import testimonialsBg from '../assets/testimonials-bg.jpg';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -34,65 +33,61 @@ const Testimonials = () => {
     }, []);
 
     return (
-        <section
-            className="py-32 relative overflow-hidden bg-stone-900"
-            id="testimonials"
-        >
-            {/* Background Texture with overlay */}
-            <div
-                className="absolute inset-0 grayscale opacity-20 scale-110"
-                style={{
-                    backgroundImage: `url(${testimonialsBg})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundAttachment: 'fixed'
-                }}
+        <section className="py-16 sm:py-24 md:py-32 relative overflow-hidden bg-stone-900" id="testimonials">
+            {/* Subtle pattern overlay */}
+            <div className="absolute inset-0 opacity-[0.03]"
+                style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-stone-900 via-stone-900/80 to-stone-900" />
 
-            <div className="container mx-auto px-6 max-w-7xl relative z-10">
+            <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-24"
+                    className="text-center mb-10 sm:mb-14 md:mb-20"
                 >
-                    <span className="text-fresh-green font-black tracking-[0.3em] uppercase text-xs mb-4 block">Kind Words</span>
-                    <h2 className="text-4xl md:text-6xl font-black text-white mb-6">Client Experiences</h2>
-                    <div className="w-24 h-2 bg-fresh-green mx-auto rounded-full"></div>
+                    <span className="inline-block text-fresh-green font-semibold tracking-[0.2em] uppercase text-[11px] sm:text-xs mb-3 sm:mb-4 px-4 py-1.5 rounded-full bg-fresh-green/10 border border-fresh-green/20">Kind Words</span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4"
+                        style={{ fontFamily: 'var(--font-serif)' }}
+                    >
+                        What Our Customers Say
+                    </h2>
+                    <p className="text-stone-400 max-w-md mx-auto text-sm sm:text-base">
+                        Real stories from the Bacchus Marsh community
+                    </p>
                 </motion.div>
 
                 {loading ? (
-                    <div className="text-center text-stone-400 font-bold tracking-widest uppercase">Harvesting Reviews...</div>
+                    <div className="text-center text-stone-400 font-medium tracking-wide text-sm py-12">Loading reviews...</div>
                 ) : (
                     <Swiper
                         modules={[Autoplay, Pagination]}
-                        spaceBetween={50}
+                        spaceBetween={16}
                         slidesPerView={1}
                         breakpoints={{
-                            1024: { slidesPerView: 2 }
+                            640: { spaceBetween: 24 },
+                            1024: { slidesPerView: 2, spaceBetween: 32 }
                         }}
                         autoplay={{ delay: 5000, disableOnInteraction: false }}
                         pagination={{ clickable: true }}
-                        className="pb-24 swiper-premium"
+                        className="pb-14 sm:pb-16 md:pb-20"
                     >
                         {testimonials.map((test) => (
                             <SwiperSlide key={test._id}>
-                                <motion.div
-                                    className="glass-panel p-12 rounded-[3.5rem] h-full flex flex-col premium-card border-white/5 relative overflow-hidden group"
-                                >
-                                    <div className="absolute -top-10 -right-10 text-[12rem] text-white/5 font-black group-hover:text-fresh-green/10 transition-colors">"</div>
-                                    <FaQuoteLeft className="text-5xl text-fresh-green mb-10" />
-                                    <p className="text-stone-800 font-medium italic mb-12 flex-grow text-xl leading-relaxed">"{test.review}"</p>
-                                    <div className="flex items-center justify-between mt-auto pt-8 border-t border-white/5">
-                                        <h4 className="font-black text-stone-900 text-lg tracking-tight uppercase">{test.name}</h4>
-                                        <div className="flex text-amber-400 gap-1 text-sm bg-white/5 p-3 rounded-2xl">
+                                <div className="p-6 sm:p-8 md:p-10 rounded-2xl h-full flex flex-col bg-white/[0.04] border border-white/[0.06] backdrop-blur-sm">
+                                    <FaQuoteLeft className="text-2xl sm:text-3xl text-fresh-green/60 mb-5 sm:mb-6" />
+                                    <p className="text-white/80 font-normal italic mb-6 sm:mb-8 flex-grow text-sm sm:text-base md:text-lg leading-relaxed">
+                                        "{test.review}"
+                                    </p>
+                                    <div className="flex items-center justify-between pt-5 sm:pt-6 border-t border-white/[0.06]">
+                                        <span className="font-bold text-white text-sm sm:text-base">{test.name}</span>
+                                        <div className="flex text-amber-400 gap-0.5 text-xs">
                                             {[...Array(test.rating || 5)].map((_, i) => (
-                                                <FaStar key={i} className="drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" />
+                                                <FaStar key={i} />
                                             ))}
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>

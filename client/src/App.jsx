@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import BusinessDetails from './components/BusinessDetails';
 import Products from './components/Products';
 import About from './components/About';
 import Testimonials from './components/Testimonials';
@@ -10,11 +9,10 @@ import Footer from './components/Footer';
 
 function App() {
     return (
-        <div className="font-sans antialiased bg-lightBg text-darkText">
+        <div className="font-sans antialiased bg-white text-stone-800">
             <Navbar />
             <Hero />
             <Products />
-            <BusinessDetails />
             <About />
             <Testimonials />
             <Contact />
