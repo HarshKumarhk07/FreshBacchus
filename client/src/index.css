@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-freshGreen: #2E7D32;
+  /* Richer Green */
+  --color-lightBrown: #8d6e63;
+  /* More professional brown */
+  --color-darkText: #1a1a1a;
+  --color-lightBg: #fcfcfc;
+  --font-sans: 'Outfit', sans-serif;
+}
+
+
+@layer base {
+  body {
+    @apply font-sans text-darkText m-0 p-0 overflow-x-hidden;
+    background-image: linear-gradient(rgba(249, 249, 249, 0.95), rgba(249, 249, 249, 0.95)), url('./assets/bg-texture.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Soft Shadows */
+.premium-shadow {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+.hover-premium-shadow:hover {
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Swiper custom styles */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #4CAF50 !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #2E7D32 !important;
+  width: 32px !important;
+  border-radius: 6px !important;
+}
